@@ -33,10 +33,18 @@ public class BowController : MonoBehaviour
     public KeyCode drawButton = KeyCode.Mouse1;
     //mesh component for bow model, needed to control blend shapes
     SkinnedMeshRenderer mesh;
+    ShotController shotController;
+
+
+    public GameObject loadedArrow;
+    public Transform ArrowPositionIdle;
+    public Transform ArrowPositionDrawn;
+     float projectileSpeed;
     // Start is called before the first frame update
     void Start()
     {
         mesh = GetComponent<SkinnedMeshRenderer>();
+        shotController = GetComponent<ShotController>();
     }
 
     // Update is called once per frame
@@ -49,6 +57,7 @@ public class BowController : MonoBehaviour
         DrawBow();
         FireBow();
         RecoilBow();
+        DrawArrow();
 
         //master set on mesh for blendshapes
         mesh.SetBlendShapeWeight(drawID, drawBlend);
@@ -56,9 +65,9 @@ public class BowController : MonoBehaviour
 
 
         //debug logging
-        // if (currState != prevState) {
-        //     Debug.Log(currState);
-        // }
+        if (currState != prevState) {
+            Debug.Log(currState);
+        }
 
     }
     // Handle drawing animation
@@ -80,12 +89,27 @@ public class BowController : MonoBehaviour
             }
             // mesh.SetBlendShapeWeight(drawID, drawBlend);
         }
+        //set projectile speed based on the current draw blend, lerps between min and max, using normalized draw blend
+        projectileSpeed = Mathf.Lerp(shotController.minSpeed, shotController.maxSpeed, drawBlend / 100f);
+    }
+
+    void DrawArrow() {
+        if (currState == BowStates.Drawing) { 
+            loadedArrow.transform.position = Vector3.Lerp(loadedArrow.transform.position, ArrowPositionDrawn.position, Time.deltaTime * drawSpeed);
+            loadedArrow.transform.rotation = Quaternion.Lerp(loadedArrow.transform.rotation, ArrowPositionDrawn.rotation, Time.deltaTime * drawSpeed);
+        } else {
+            loadedArrow.transform.position = Vector3.Lerp(loadedArrow.transform.position, ArrowPositionIdle.position, Time.deltaTime * releaseSpeed);
+            loadedArrow.transform.rotation = Quaternion.Lerp(loadedArrow.transform.rotation, ArrowPositionIdle.rotation, Time.deltaTime * releaseSpeed);
+        }
     }
 
     // Handle firing animation and call fire function
+    float maxProjectileSpeed;
     void FireBow() {
         if (currState != BowStates.Firing) return;
-
+        if (projectileSpeed > maxProjectileSpeed) {
+            maxProjectileSpeed = projectileSpeed;
+        }
         // Debug.Log("Shwip");
         //if bow has been drawn before firing
         if (drawBlend > 1f) {
@@ -95,6 +119,10 @@ public class BowController : MonoBehaviour
             // when bow has gone back to no blend, start recoil animation and fire projectile
             drawBlend = 0;
             Debug.Log("FIRE!");
+            shotController.FireShot(maxProjectileSpeed);
+            //reset max projectile speed to min proj speed
+            maxProjectileSpeed = shotController.minSpeed;
+            loadedArrow.SetActive(false);
             currState = BowStates.Recoiling;
         }
         
@@ -118,6 +146,7 @@ public class BowController : MonoBehaviour
                     //stop lerp from fluctuating at min
                     recoilBlend = 0f;
                     //once back to no blend, go back to idling, reset recoil bool for next Recoil
+                    loadedArrow.SetActive(true);
                     currState = BowStates.Idling;
                     isRecoilIncreasing = true;
                 }
