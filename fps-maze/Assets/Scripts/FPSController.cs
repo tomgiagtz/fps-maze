@@ -135,4 +135,11 @@ public class FPSController : MonoBehaviour
         //apply our final move direction to the player in game using the built in characterController move funciton
         characterController.Move(moveDirection * Time.deltaTime);
     }
+
+    private void OnControllerEnter(ControllerColliderHit other) {
+        
+        Debug.Log(other.gameObject.tag);
+        if (other.gameObject.tag == "Player")
+            Debug.Log("{ickup");
+    }
 }
