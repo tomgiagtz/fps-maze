@@ -65,9 +65,9 @@ public class BowController : MonoBehaviour
 
 
         //debug logging
-        if (currState != prevState) {
-            Debug.Log(currState);
-        }
+        // if (currState != prevState) {
+        //     Debug.Log(currState);
+        // }
 
     }
     // Handle drawing animation

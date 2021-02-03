@@ -18,6 +18,6 @@ public class FlagController : MonoBehaviour
     }
     private void HandleFlagPickup()
     {
-        Debug.Log("Pickup");
+        Destroy(gameObject);
     }
 }

@@ -5,6 +5,9 @@ using UnityEngine;
 public class ShotController : MonoBehaviour
 {
     //Variables
+    public enum ShotType {Arrow, FireBall};
+
+    public ShotType shotType = ShotType.Arrow;
     public GameObject projectile;
     public Transform muzzlePoint;
     public GameObject projectileParent;
@@ -28,7 +31,11 @@ public class ShotController : MonoBehaviour
             //set the parent of the projectile to a null object so it is not impaced by our character movement
             currProjectile.transform.SetParent(projectileParent.transform);
             //add force to the projectile
-            currProjectile.GetComponent<Rigidbody>().AddForce(muzzlePoint.right * _projectileSpeed);
+            if (shotType == ShotType.Arrow) {
+                currProjectile.GetComponent<Rigidbody>().AddForce(muzzlePoint.right * _projectileSpeed);
+            } else if (shotType ==ShotType.FireBall) {
+                currProjectile.GetComponent<Rigidbody>().AddForce(muzzlePoint.forward * _projectileSpeed);
+            }
             //destroy the projectile after time has passed
             Destroy(currProjectile, projectileLifespan);
     }

@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Flag
   - Ground
+  - Brazier
+  - FireBall
+  - Start
+  - Arrow
   layers:
   - Default
   - TransparentFX
@@ -15,8 +19,8 @@ TagManager:
   - UI
   - Player
   - Pickup
-  - 
-  - 
+  - Enemy
+  - Arrow
   - 
   - 
   - 

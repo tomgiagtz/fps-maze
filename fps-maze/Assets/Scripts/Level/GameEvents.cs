@@ -28,19 +28,19 @@ public class GameEvents : MonoBehaviour
         }
     }
 
-    //very similarly, create events for enemy range enter and exit
-    public event Action<int> onEnemyRangeEnter;
-    public void EnemyRangeEnter(int id) {
-        if (onEnemyRangeEnter != null) {
-            onEnemyRangeEnter(id);
+    //very similarly, create event when inside the start
+    public event Action onTriggerStart;
+    public void TriggerStart() {
+        if (onTriggerStart != null) {
+            onTriggerStart();
         }
     }
 
-    // hope you get it by now :)
-    public event Action<int> onEnemyRangeExit;
-    public void EnemyRangeExit(int id) {
-        if (onEnemyRangeExit != null) {
-            onEnemyRangeExit(id);
-        }
-    }
+    // // hope you get it by now :)
+    // public event Action<int> onEnemyRangeExit;
+    // public void EnemyRangeExit(int id) {
+    //     if (onEnemyRangeExit != null) {
+    //         onEnemyRangeExit(id);
+    //     }
+    // }
 }
