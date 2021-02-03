@@ -14,7 +14,7 @@ public class FPSController : MonoBehaviour
     //camera Variables
     public Camera playerCamera;
     public float lookSpeed = 2f;
-    public float lookLimitX = 45f;
+    public float lookLimitX = 90f;
 
     //bow variables (removed)
     // public Transform bowTransform;
@@ -56,7 +56,7 @@ public class FPSController : MonoBehaviour
         MovePlayer();
         
 
-        RotateCameraAndBow();
+        RotateCamera();
 
     }
 
@@ -73,7 +73,7 @@ public class FPSController : MonoBehaviour
         }
     }
 
-    void RotateCameraAndBow() {
+    void RotateCamera() {
         //calculate where our camera should rotate based on mouse input
         rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
         //restrict how high or low the camera can rotate
@@ -136,10 +136,5 @@ public class FPSController : MonoBehaviour
         characterController.Move(moveDirection * Time.deltaTime);
     }
 
-    private void OnControllerEnter(ControllerColliderHit other) {
-        
-        Debug.Log(other.gameObject.tag);
-        if (other.gameObject.tag == "Player")
-            Debug.Log("{ickup");
-    }
+    
 }
