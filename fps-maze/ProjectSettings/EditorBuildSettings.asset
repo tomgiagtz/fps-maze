@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/FPSMaze.unity
+    guid: 5c68a7193ca325c4081b7fcf7b033d31
   m_configObjects: {}
