@@ -10,7 +10,7 @@ Material:
   m_Name: BrazierFire
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _EMISSION
-  m_LightmapFlags: 1
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -73,6 +73,6 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 1, g: 0.8513208, b: 0.2971698, a: 1}
-    - _EmissionColor: {r: 1, g: 0.81230557, b: 0.25943398, a: 1}
+    - _Color: {r: 0.9339623, g: 0.9339623, b: 0.9339623, a: 0.6117647}
+    - _EmissionColor: {r: 1.5157166, g: 0.6656557, b: 0.050047275, a: 0}
   m_BuildTextureStacks: []
