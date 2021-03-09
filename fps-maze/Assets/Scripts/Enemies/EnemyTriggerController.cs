@@ -11,11 +11,16 @@ public class EnemyTriggerController : MonoBehaviour
         meshContr = GetComponentInParent<NavMeshController>();
     }
 
-    private void OnTriggerStay(Collider other) {
+    private void OnTriggerEnter(Collider other) {
         if (other.gameObject.tag == "Player") {
-            Debug.Log(other.gameObject);
             Vector3 target = other.transform.position;
-            meshContr.OnDetect(target);
+            meshContr.OnStartDetect(target);
+        }
+    }
+
+    private void OnTriggerExit(Collider other) {
+        if (other.gameObject.tag == "Player") {
+            meshContr.OnEndDetect();
         }
     }
 }

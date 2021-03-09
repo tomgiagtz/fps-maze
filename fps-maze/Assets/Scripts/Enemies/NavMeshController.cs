@@ -22,10 +22,10 @@ public class NavMeshController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (agent.pathPending && agent.remainingDistance > leaveRange) {
-            enemyController.engaged = false;
-            agent.destination = wayPoints[currentWayPoint].position;
-        }
+        // if (agent.pathStatus == NavMeshPathStatus.PathComplete && enemyController.engaged) {
+        //     enemyController.engaged = false;
+        //     agent.destination = wayPoints[currentWayPoint].position;
+        // }
     }
 
 
@@ -40,9 +40,13 @@ public class NavMeshController : MonoBehaviour
         agent.destination = wayPoints[currentWayPoint].position;
     }
 
-    public void OnDetect(Vector3 target) {
+    public void OnStartDetect(Vector3 target) {
         enemyController.engaged = true;
-        Debug.Log("target" + target.ToString());
         agent.destination = target;
     }
+    public void OnEndDetect() {
+        enemyController.engaged = false;
+        agent.destination = wayPoints[currentWayPoint].position;
+    }
 }
+
