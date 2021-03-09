@@ -5440,6 +5440,8 @@ GameObject:
   - component: {fileID: 1765069820}
   - component: {fileID: 1765069818}
   - component: {fileID: 1765069819}
+  - component: {fileID: -4095157375113934952}
+  - component: {fileID: 1068928317218646521}
   m_Layer: 8
   m_Name: brazier
   m_TagString: Brazier
@@ -5564,3 +5566,39 @@ MonoBehaviour:
   projectileSpeed: 150
   minSpeed: 150
   maxSpeed: 1500
+--- !u!195 &-4095157375113934952
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3313289267847127402}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.9310472
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 6
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &1068928317218646521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3313289267847127402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58a48e67b9ba1224991ecd230cd24962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wayPoints: []
+  currentWayPoint: 0

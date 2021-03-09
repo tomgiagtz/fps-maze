@@ -54,9 +54,6 @@ public class HUDController : MonoBehaviour
         }
 
         flagIcon.gameObject.SetActive(flagCollected);
-        
-        Debug.Log(tips[tipsIndex]);
-
 
         
     }

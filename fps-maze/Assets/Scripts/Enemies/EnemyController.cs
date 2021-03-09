@@ -56,6 +56,8 @@ public class EnemyController : MonoBehaviour
     }
 
     void HandleFlagPickup() {
-        engaged = true;
+        // engaged = true;
     }
+
+    
 }
