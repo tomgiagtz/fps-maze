@@ -26,13 +26,17 @@ public class TorchController : MonoBehaviour
 
         Vector3 rayOrigin = cam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0f));
 
-        bool hasHit = Physics.Raycast(rayOrigin, cam.transform.forward, out hit, shootRange, hitMask, QueryTriggerInteraction.Ignore);
 
         Debug.DrawRay(rayOrigin, cam.transform.forward * shootRange, hitCol, 0.1f);
         if (Input.GetButtonDown("Fire1")) {
-            Debug.Log("HIT");
-            if (hasHit && hit.transform.tag == "Enemy") {
+            // Debug.Log(hit);
+            // Debug.Log(hasHit);
+
+            if (Physics.Raycast(rayOrigin, cam.transform.forward, out hit, shootRange, hitMask, QueryTriggerInteraction.Ignore)) {
+            Debug.Log(hit.transform.gameObject.tag);
                 Debug.Log("HIT");
+                hit.transform.gameObject.GetComponent<EnemyController>().OnHit();
+                // Debug.Log(enemy);
             }
         }
     }

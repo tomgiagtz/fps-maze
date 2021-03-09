@@ -15,12 +15,18 @@ public class EnemyController : MonoBehaviour
     private float currCoolDown = 0f;
 
     private ParticleSystem particles;
+    public Material lampMat;
+
+    [ColorUsage(true, true)]
+    public Color32 litColor, unlitColor;
+    private bool wasHit = false;
     
     // private bool flagPickedUp = false;
     private void Start() {
         GameEvents.current.onFlagPickup += HandleFlagPickup;
         shotController = GetComponent<ShotController>();
         particles = GetComponentInChildren<ParticleSystem>();
+        litColor = lampMat.GetColor("_EmissionColor");
     }
 
     private void OnDisable() {
@@ -54,6 +60,35 @@ public class EnemyController : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public void Disengage() {
+        engaged = false;
+
+    }
+
+    public void Engage() {
+        if (!wasHit) {
+            engaged = true;
+            lampMat.SetColor("_EmissionColor", litColor);
+        }
+        
+    }
+
+    public void OnHit() {
+        Disengage();
+        lampMat.SetColor("_EmissionColor", unlitColor);
+
+        wasHit = true;
+        StartCoroutine(Death());
+    }
+
+    IEnumerator Death() {
+        yield return new WaitForSeconds(2);
+
+        Destroy(this.gameObject);
+    }
+
+
 
     void HandleFlagPickup() {
         // engaged = true;

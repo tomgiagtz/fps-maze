@@ -41,11 +41,11 @@ public class NavMeshController : MonoBehaviour
     }
 
     public void OnStartDetect(Vector3 target) {
-        enemyController.engaged = true;
+        enemyController.Engage();
         agent.destination = target;
     }
     public void OnEndDetect() {
-        enemyController.engaged = false;
+        enemyController.Disengage();
         agent.destination = wayPoints[currentWayPoint].position;
     }
 }
