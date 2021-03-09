@@ -784,7 +784,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 1
+  moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -963,7 +963,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.36
+      scalar: 0.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -5592,12 +5592,8 @@ MonoBehaviour:
   engaged: 0
   coolDownTime: 3
   lampMat: {fileID: 2100000, guid: cce0a97e062910c4ab417eb440159add, type: 2}
-  litColor:
-    serializedVersion: 2
-    rgba: 4718591
-  unlitColor:
-    serializedVersion: 2
-    rgba: 0
+  litColor: {r: 0, g: 0, b: 0, a: 0}
+  unlitColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &1765069819
 MonoBehaviour:
   m_ObjectHideFlags: 0

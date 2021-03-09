@@ -16,17 +16,25 @@ public class EnemyController : MonoBehaviour
 
     private ParticleSystem particles;
     public Material lampMat;
+    MeshRenderer meshRenderer;
+    Material localMat;
 
     [ColorUsage(true, true)]
-    public Color32 litColor, unlitColor;
+    public Color litColor, unlitColor;
     private bool wasHit = false;
+    
     
     // private bool flagPickedUp = false;
     private void Start() {
         GameEvents.current.onFlagPickup += HandleFlagPickup;
         shotController = GetComponent<ShotController>();
         particles = GetComponentInChildren<ParticleSystem>();
-        litColor = lampMat.GetColor("_EmissionColor");
+        localMat = new Material(lampMat);
+        meshRenderer = GetComponent<MeshRenderer>();
+        meshRenderer.materials[1] = localMat;
+
+        localMat.SetColor("_EmissionColor", litColor);
+        particles.Stop();
     }
 
     private void OnDisable() {
@@ -36,11 +44,11 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (engaged) {
-            particles.Play();
-        } else {
-            particles.Stop();
-        }
+        // if (engaged) {
+        //     particles.Play();
+        // } else {
+        //     particles.Stop();
+        // }
         currCoolDown += Time.deltaTime;
 
 
@@ -63,20 +71,22 @@ public class EnemyController : MonoBehaviour
 
     public void Disengage() {
         engaged = false;
+        particles.Stop();
 
     }
 
     public void Engage() {
         if (!wasHit) {
+            particles.Play();
             engaged = true;
-            lampMat.SetColor("_EmissionColor", litColor);
+            localMat.SetColor("_EmissionColor", litColor);
         }
         
     }
 
     public void OnHit() {
         Disengage();
-        lampMat.SetColor("_EmissionColor", unlitColor);
+        localMat.SetColor("_EmissionColor", unlitColor);
 
         wasHit = true;
         StartCoroutine(Death());
